@@ -1,14 +1,13 @@
 import React from 'react';
-import './App.css';
-import css from './App.module.less'
+import Search from './Main/Search/Search'
+import Header from './Main/Header/Header'
 
-function App() {
+const App = () => {
   return (
-    <div className={css.kek}>
-      <header className="App-header">
-        12345
-      </header>
-    </div>
+    <>
+      <Header/>
+      <Search/>
+    </>
   );
 }
 
