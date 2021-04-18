@@ -1,12 +1,19 @@
-import React from 'react';
-import Search from './Main/Search/Search'
-import Header from './Main/Header/Header'
+import React, { useState } from 'react';
+import Search from './components/Search/Search'
+import Header from './components/Header/Header'
+import { NotificationContainer } from 'react-notifications'
+import AlphaPlot from './components/AlphaPlot'
+import 'react-notifications/lib/notifications.css'
 
 const App = () => {
+  const [alphaData, setAlphaData] = useState([])
+
   return (
     <>
       <Header/>
-      <Search/>
+      <Search setAlphaData={setAlphaData}/>
+      <AlphaPlot data={alphaData}/>
+      <NotificationContainer/>
     </>
   );
 }
