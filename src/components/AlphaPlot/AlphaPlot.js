@@ -1,5 +1,6 @@
 import React from 'react'
-import Plot from 'react-plotly.js';
+import Plot from 'react-plotly.js'
+import { Divider} from '@material-ui/core'
 
 const AlphaPlot = ({ data }) => {
   const keys = Object.keys(data)
@@ -23,22 +24,25 @@ const AlphaPlot = ({ data }) => {
   if (keys.length > 0)  {
     const formattedData = formatData(data, keys)
     return (
-      <Plot
-        data={[
-          {
-            x: formattedData.timesstamps,
-            y: formattedData.prices,
-            type: 'graph_plot',
-            mode: 'lines+markers',
-            marker: {color: 'red'},
-          }
-        ]}
-        layout={{
-          width: 920,
-          height: 440,
-          title: `${formattedData.symbol} (last refreshed: ${formattedData.lastRefreshed})`
-        }}
-      />
+      <>
+        <Divider />
+        <Plot
+          data={[
+            {
+              x: formattedData.timesstamps,
+              y: formattedData.prices,
+              type: 'graph_plot',
+              mode: 'lines',
+              marker: {color: 'red'},
+            }
+          ]}
+          layout={{
+            width: 920,
+            height: 440,
+            title: `${formattedData.symbol} (last refreshed: ${formattedData.lastRefreshed})`
+          }}
+        />
+      </>
     )
   }
   return null

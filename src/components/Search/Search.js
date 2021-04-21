@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import { Button, TextField, MenuItem } from '@material-ui/core';
+import { TextField, MenuItem } from '@material-ui/core'
 import { Form } from 'react-final-form'
-import { Autocomplete, Select } from 'mui-rff';
+import { Autocomplete, Select } from 'mui-rff'
 import { api, SYMBOL_SEARCH, apikey } from '../../alphaVoltage'
 import { useGetAxiosFetch } from '../../useGetAxiosFetch'
+import SubmitButton from '../SubmitButton'
 import { NotificationManager } from 'react-notifications'
 import css from './Search.module.less'
+import globalCss from '../globalStyles.module.less'
 
 const Search = ({ setAlphaData }) => {
   const [options, setOptions] = useState([])
@@ -36,25 +38,34 @@ const Search = ({ setAlphaData }) => {
         }})
   }
 
+  const validate = (values) => {
+    const errors = {}
+
+    if (!values.search) {
+      errors.search = 'Field "Search" is required.'
+    }
+    if (!values.timeSeries) {
+      errors.timeSeries = 'Field "TimeSeries" is required.'
+    }
+
+    return errors
+  }
   return (
     <Form
       onSubmit={onSubmit}
       initialValues={{
         interval: '15min',
       }}
-      render={({ handleSubmit, form, submitting, pristine, values }) => (
+      validate={validate}
+      render={({ handleSubmit, submitting, pristine, values, hasValidationErrors }) => (
         <form onSubmit={handleSubmit}>  
-          <div className={css.searchContainer}>
+          <div className={globalCss.formContainer}>
             <Autocomplete
               name='search'
               className={css.autoComplete}
               loading={loading}
               options={options}
-              getOptionSelected={(
-                option,
-                value,
-             ) => value.value === option.value}
-              
+              getOptionSelected={(option, value) => value.value === option.value}
               getOptionLabel={(option) => option['2. name'] || ''}
               renderInput={(params) => (
                 <TextField
@@ -69,20 +80,17 @@ const Search = ({ setAlphaData }) => {
                 />
               )}
             />
-
             <Select
               name='timeSeries'
               className={css.select}
               style={{minWidth: 300}}
               label='Select time series'
-             
             >
               <MenuItem value='TIME_SERIES_INTRADAY&symbol='>Intraday</MenuItem>
               <MenuItem value='TIME_SERIES_DAILY&symbol='>Daily</MenuItem>
               <MenuItem value='TIME_SERIES_WEEKLY&symbol='>Weekly</MenuItem>
               <MenuItem value='TIME_SERIES_MONTHLY&symbol='>Monthly</MenuItem>
             </Select>
-            
             {values.timeSeries === 'TIME_SERIES_INTRADAY&symbol=' &&
             <Select
               name='interval'
@@ -96,16 +104,10 @@ const Search = ({ setAlphaData }) => {
               <MenuItem value='30min'>30 min</MenuItem>
               <MenuItem value='60min'>60 min</MenuItem>
             </Select>}
-              
-            <Button
-              variant='contained'
-              className={css.submitButton}
-              color='primary'
-              type='submit'
-              disabled={pristine || submitting}
-            >
-              Fetch data
-            </Button>
+            <SubmitButton
+              label='Fetch data'
+              disabled={pristine || submitting || hasValidationErrors}
+            />
           </div>
         </form>
       )}
