@@ -3,11 +3,12 @@ import { Form } from 'react-final-form'
 import { TextField } from 'mui-rff'
 import SubmitButton from '../SubmitButton'
 import globalCss from '../globalStyles.module.less'
+import { computeSma } from '../helpers/computeSma'
 
 
-const SmaForm = ({ windowSize, setWindowSize, alphaData }) => {
+const SmaForm = ({ setSmaData, alphaData }) => {
   const onSubmit = (values) => {
-    setWindowSize(values.windowSize)
+    setSmaData(computeSma(alphaData, values.windowSize))
   }
   
   const validate = (values) => {
@@ -24,9 +25,9 @@ const SmaForm = ({ windowSize, setWindowSize, alphaData }) => {
     <Form
       onSubmit={onSubmit}
       validate={validate}
-      initialValues={
-        windowSize={windowSize}
-      }
+      initialValues={{
+        windowSize: 50
+      }}
       render={({
         handleSubmit, hasValidationErrors
       }) => (

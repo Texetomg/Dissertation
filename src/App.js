@@ -9,7 +9,7 @@ import { Container, Card, CardContent } from '@material-ui/core'
 
 const App = () => {
   const [alphaData, setAlphaData] = useState(null)
-  const [windowSize, setWindowSize] = useState(50)
+  const [smaData, setSmaData] = useState(50)
 
   return (
     <>
@@ -24,8 +24,7 @@ const App = () => {
         <Card>
           <CardContent>
             <SmaForm
-              windowSize={windowSize}
-              setWindowSize={setWindowSize}
+              setSmaData={setSmaData}
               alphaData={alphaData}
             />
           </CardContent> 

@@ -8,6 +8,7 @@ import SubmitButton from '../SubmitButton'
 import { NotificationManager } from 'react-notifications'
 import css from './Search.module.less'
 import globalCss from '../globalStyles.module.less'
+import { formatData } from '../helpers/formatAlphaData'
 
 const Search = ({ setAlphaData }) => {
   const [options, setOptions] = useState([])
@@ -16,12 +17,13 @@ const Search = ({ setAlphaData }) => {
   const onSubmit = ({search, timeSeries, interval}) => {
     const timeInterval = timeSeries === 'TIME_SERIES_INTRADAY' ? `&interval=${interval}` : ''
   
-    fetchData(`${api}${timeSeries}${search['1. symbol']}${timeInterval}${apikey}`)
+    /* fetchData(`${api}${timeSeries}${search['1. symbol']}${timeInterval}&outputSize=full${apikey}`) */
+    fetchData(`${api}${timeSeries}MSFT${timeInterval}&outputsize=full&apikey=demo`)
       .then(({ data }) => {
         if (data?.['Note']) {
           NotificationManager.warning('Maximum call frequency', 'Wait 1 minute', 3000)
         } else {
-          setAlphaData(data)
+          setAlphaData(formatData(data))
           NotificationManager.success('Success message', 'Title here')
         }
       })
@@ -41,9 +43,9 @@ const Search = ({ setAlphaData }) => {
   const validate = (values) => {
     const errors = {}
 
-    if (!values.search) {
+    /* if (!values.search) {
       errors.search = 'Field "Search" is required.'
-    }
+    } */
     if (!values.timeSeries) {
       errors.timeSeries = 'Field "TimeSeries" is required.'
     }
