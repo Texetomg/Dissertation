@@ -1,9 +1,9 @@
 import React from 'react'
 import { Form } from 'react-final-form'
 import { TextField } from 'mui-rff'
-import SubmitButton from '../SubmitButton'
-import globalCss from '../globalStyles.module.less'
-import { computeSma } from '../helpers/computeSma'
+import SubmitButton from '../../common/SubmitButton'
+import globalCss from '../../globalStyles.module.less'
+import { computeSma } from '../../../helpers/computeSma'
 
 
 const SmaForm = ({ setSmaData, alphaData }) => {

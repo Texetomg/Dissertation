@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { TextField, MenuItem } from '@material-ui/core'
 import { Form } from 'react-final-form'
 import { Autocomplete, Select } from 'mui-rff'
-import { api, SYMBOL_SEARCH, apikey } from '../../alphaVoltage'
-import { useGetAxiosFetch } from '../../useGetAxiosFetch'
-import SubmitButton from '../SubmitButton'
+import { api, SYMBOL_SEARCH, apikey } from '../../../helpers/alphaVoltage'
+import { useGetAxiosFetch } from '../../../helpers/useGetAxiosFetch'
+import SubmitButton from '../../common/SubmitButton'
 import { NotificationManager } from 'react-notifications'
 import css from './Search.module.less'
-import globalCss from '../globalStyles.module.less'
-import { formatData } from '../helpers/formatAlphaData'
+import globalCss from '../../globalStyles.module.less'
+import { formatData } from '../../../helpers/formatAlphaData'
 
 const Search = ({ setAlphaData }) => {
   const [options, setOptions] = useState([])
