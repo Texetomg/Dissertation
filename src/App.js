@@ -10,7 +10,7 @@ import { Container, Card, CardContent } from '@material-ui/core'
 
 const App = () => {
   const [alphaData, setAlphaData] = useState(null)
-  const [smaData, setSmaData] = useState(50)
+  const [smaData, setSmaData] = useState(null)
 
   return (
     <>
@@ -28,7 +28,7 @@ const App = () => {
               setSmaData={setSmaData}
               alphaData={alphaData}
             />
-            {smaData && <SmaPlot data={alphaData} smaData={smaData}/>}
+            {smaData && <SmaPlot mainData={alphaData} smaData={smaData}/>}
           </CardContent> 
         </Card>
       </Container>

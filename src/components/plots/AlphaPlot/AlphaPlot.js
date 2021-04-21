@@ -14,7 +14,7 @@ const AlphaPlot = ({ data }) => {
               y: data.prices,
               type: 'graph_plot',
               mode: 'lines',
-              marker: {color: 'red'},
+              name: 'Stock price'
             }
           ]}
           layout={{
