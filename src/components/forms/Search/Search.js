@@ -56,6 +56,7 @@ const Search = ({ setAlphaData }) => {
     <Form
       onSubmit={onSubmit}
       initialValues={{
+        search: 'MSFT',
         interval: '15min',
       }}
       validate={validate}

@@ -34,7 +34,7 @@ const SmaPlot = ({ mainData, smaData }) => {
           layout={{
             width: 920,
             height: 440,
-            title: `Stock Prive and Sma`
+            title: `Stock price and SMA`
           }}
         />
       </>

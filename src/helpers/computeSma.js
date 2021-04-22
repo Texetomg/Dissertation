@@ -10,6 +10,6 @@ export const computeSma = (data, windowSize) => {
 
     r_avgs.push({ set: data.prices.slice(i, i + windowSize), avg: curr_avg, timestamp: data.timesstamps[i] })
   }
-console.log(data, r_avgs)
+
   return r_avgs;
 }
