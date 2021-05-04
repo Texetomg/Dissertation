@@ -8,6 +8,7 @@ import TrainPlot from './components/plots/TrainPlot'
 import SmaForm from './components/forms/SmaForm'
 import TrainForm from './components/forms/TrainForm'
 import ValidationForm from './components/forms/ValidationForm'
+import ValidationPlot from './components/plots/ValidationPlot'
 import 'react-notifications/lib/notifications.css'
 import { Container, Card, CardContent } from '@material-ui/core'
 
@@ -21,7 +22,7 @@ const App = () => {
   const [model, setModel] = useState(null)
   const [validateData, setValidateData] = useState(null)
   trainDataRef.current = trainData
-  console.log(validateData)
+
   return (
     <>
       <Header/>
@@ -70,7 +71,13 @@ const App = () => {
               setValidateData={setValidateData}
               windowSize={windowSize}
             />
-           {/*  {trainData && <ValidationPlot trainData={trainData}/>} */}
+            {validateData && (
+              <ValidationPlot
+                mainData={alphaData}
+                smaData={smaData}
+                validateData={validateData}
+              />
+            )}
           </CardContent> 
         </Card>
       </Container>

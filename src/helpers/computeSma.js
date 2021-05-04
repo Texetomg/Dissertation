@@ -1,7 +1,7 @@
 export const computeSma = (data, windowSize) => {
   let r_avgs = []
 
-  for (let i = 0; i <= data.prices.length - windowSize; i+=windowSize){
+  for (let i = 0; i <= data.prices.length - windowSize; i++){
     let curr_avg = 0.00
     let t = i + windowSize
     for (let k = i; k < t && k <= data.prices.length; k++){

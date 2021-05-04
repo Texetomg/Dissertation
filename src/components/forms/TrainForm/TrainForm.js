@@ -15,6 +15,7 @@ const TrainForm = ({ trainData, setTrainData, smaData, trainingSize, setTraining
       y: [...y, log.loss]
     })
   }
+ 
   const onSubmit = async ({ trainingSize, epochs, learningRate, hiddenLayers }) => {
     let inputs = smaData.map(data => data.set.map(data => parseInt(data, 10)))
     inputs = inputs.slice(0, Math.floor(trainingSize / 100 * inputs.length))
@@ -24,6 +25,8 @@ const TrainForm = ({ trainData, setTrainData, smaData, trainingSize, setTraining
 
     const windowSize = smaData[0].set.length
     setTrainingSize(trainingSize)
+    console.log(inputs)
+    console.log(outputs)
     const result = await trainModel(inputs, outputs, windowSize, epochs, learningRate, hiddenLayers, callback)
     setModel(result)
   }
