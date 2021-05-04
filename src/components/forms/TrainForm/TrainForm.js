@@ -5,7 +5,7 @@ import SubmitButton from '../../common/SubmitButton'
 import globalCss from '../../globalStyles.module.less'
 import { trainModel } from '../../../helpers/trainModel'
 
-const TrainForm = ({ trainData, setTrainData, smaData }) => {
+const TrainForm = ({ trainData, setTrainData, smaData, trainingSize, setTrainingSize, setModel }) => {
   const callback = (epoch, log) => {
     const x = trainData.current?.x || []
     const y = trainData.current?.y || []
@@ -15,7 +15,7 @@ const TrainForm = ({ trainData, setTrainData, smaData }) => {
       y: [...y, log.loss]
     })
   }
-  const onSubmit = ({ trainingSize, epochs, learningRate, hiddenLayers }) => {
+  const onSubmit = async ({ trainingSize, epochs, learningRate, hiddenLayers }) => {
     let inputs = smaData.map(data => data.set.map(data => parseInt(data, 10)))
     inputs = inputs.slice(0, Math.floor(trainingSize / 100 * inputs.length))
 
@@ -23,8 +23,9 @@ const TrainForm = ({ trainData, setTrainData, smaData }) => {
     outputs = outputs.slice(0, Math.floor(trainingSize / 100 * outputs.length))
 
     const windowSize = smaData[0].set.length
-
-    trainModel(inputs, outputs, windowSize, epochs, learningRate, hiddenLayers, callback)
+    setTrainingSize(trainingSize)
+    const result = await trainModel(inputs, outputs, windowSize, epochs, learningRate, hiddenLayers, callback)
+    setModel(result)
   }
 
   const validate = (values) => {
@@ -51,7 +52,7 @@ const TrainForm = ({ trainData, setTrainData, smaData }) => {
       onSubmit={onSubmit}
       validate={validate}
       initialValues={{
-        trainingSize: 80,
+        trainingSize: trainingSize,
         epochs: 20,
         learningRate: 0.01,
         hiddenLayers: 4
@@ -65,6 +66,7 @@ const TrainForm = ({ trainData, setTrainData, smaData }) => {
             label='Training dataset size (%)'
             variant='outlined'
             type='number'
+          
           />
           <TextField
             name='epochs'

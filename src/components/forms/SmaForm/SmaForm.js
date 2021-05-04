@@ -6,8 +6,9 @@ import globalCss from '../../globalStyles.module.less'
 import { computeSma } from '../../../helpers/computeSma'
 
 
-const SmaForm = ({ setSmaData, alphaData }) => {
+const SmaForm = ({ setSmaData, alphaData, windowSize, setWindowSize }) => {
   const onSubmit = (values) => {
+    setWindowSize(values.windowSize)
     setSmaData(computeSma(alphaData, +values.windowSize))
   }
   
@@ -26,7 +27,7 @@ const SmaForm = ({ setSmaData, alphaData }) => {
       onSubmit={onSubmit}
       validate={validate}
       initialValues={{
-        windowSize: 50
+        windowSize: windowSize
       }}
       render={({
         handleSubmit, hasValidationErrors

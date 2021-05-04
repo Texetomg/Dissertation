@@ -1,3 +1,3 @@
-import ValidationForm from './TrainForm'
+import ValidationForm from './ValidationForm'
 
 export default ValidationForm
