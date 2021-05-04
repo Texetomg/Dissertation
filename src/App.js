@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Search from './components/forms/Search/Search'
 import Header from './components/Header/Header'
 import { NotificationContainer } from 'react-notifications'
@@ -14,7 +14,9 @@ const App = () => {
   const [alphaData, setAlphaData] = useState(null)
   const [smaData, setSmaData] = useState(null)
   const [trainData, setTrainData] = useState(null)
-
+  const trainDataRef = useRef()
+  trainDataRef.current = trainData
+ 
   return (
     <>
       <Header/>
@@ -42,6 +44,7 @@ const App = () => {
         <Card>
           <CardContent>
             <TrainForm
+              trainData={trainDataRef}
               setTrainData={setTrainData}
               smaData={smaData}
             />

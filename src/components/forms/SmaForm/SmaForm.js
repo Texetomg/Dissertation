@@ -8,7 +8,7 @@ import { computeSma } from '../../../helpers/computeSma'
 
 const SmaForm = ({ setSmaData, alphaData }) => {
   const onSubmit = (values) => {
-    setSmaData(computeSma(alphaData, values.windowSize))
+    setSmaData(computeSma(alphaData, +values.windowSize))
   }
   
   const validate = (values) => {
