@@ -17,7 +17,7 @@ const Search = ({ setAlphaData }) => {
   const onSubmit = ({search, timeSeries, interval}) => {
     const timeInterval = timeSeries === 'TIME_SERIES_INTRADAY' ? `&interval=${interval}` : ''
   
-    /* fetchData(`${api}${timeSeries}${search['1. symbol']}${timeInterval}&outputSize=full${apikey}`) */
+   /*  fetchData(`${api}${timeSeries}${search['1. symbol']}${timeInterval}&outputsize=full${apikey}`) */
     fetchData(`${api}${timeSeries}MSFT${timeInterval}&outputsize=full&apikey=demo`)
       .then(({ data }) => {
         if (data?.['Note']) {

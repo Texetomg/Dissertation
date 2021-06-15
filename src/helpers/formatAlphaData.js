@@ -12,5 +12,7 @@ export const formatData = (data) => {
     result.timesstamps.push(date)
     result.prices.push(data[keys[1]][date]['4. close'])
   }
+  result.prices.reverse()
+  result.timesstamps.reverse()
   return result
 }

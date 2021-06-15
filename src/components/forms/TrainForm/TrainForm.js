@@ -56,7 +56,7 @@ const TrainForm = ({ trainData, setTrainData, smaData, trainingSize, setTraining
       validate={validate}
       initialValues={{
         trainingSize: trainingSize,
-        epochs: 20,
+        epochs: 10,
         learningRate: 0.01,
         hiddenLayers: 4
       }}
